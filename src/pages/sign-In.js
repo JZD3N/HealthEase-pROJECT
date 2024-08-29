@@ -1,6 +1,16 @@
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export default function SignIn() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //Your validation code for go here
+
+    navigate('/dashboard'); // Redirect to dashboard
+  };
+
   return (
-    <>
       <div className="flex min-h-full flex-1 flex-col justify-center align-middle px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -14,7 +24,7 @@ export default function SignIn() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -75,15 +85,14 @@ export default function SignIn() {
 
           <p className="mt-10 text-center text-sm text-gray-400">
             Not a member?{' '}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-blue-400 hover:text-indigo-500"
-            >
-              Register Now
-            </a>
+            <Link
+                    to="/signup"
+                    className="font-semibold leading-6 text-blue-400 hover:text-indigo-500"
+                  >
+                    Register Now
+                  </Link>
           </p>
         </div>
       </div>
-    </>
   );
 }
