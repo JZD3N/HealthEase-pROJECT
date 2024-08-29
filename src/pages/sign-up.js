@@ -1,35 +1,27 @@
-export default function Login() {
+export default function SignUp() {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <html className="h-full bg-white">
         <body className="h-full">
-          <div className="h-full flex min-h-full flex-1">
+          <div className="flex min-h-full flex-1">
             <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
               <div className="mx-auto w-full max-w-sm lg:w-96">
                 <div>
                   <img
                     className="h-10 w-auto"
-                    src="../public/favicon-192x192.png"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                     alt="Your Company"
                   />
                   <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     Sign in to your account
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-gray-500">
-                    Not a member?{' '}
+                    Already have an account{' '}
                     <a
+                      href="#"
                       className="font-semibold text-indigo-600 hover:text-indigo-500"
-                      href="./pages/sign-up.js"
                     >
-                      Register Now
+                      Login
                     </a>
                   </p>
                 </div>
@@ -37,6 +29,24 @@ export default function Login() {
                 <div className="mt-10">
                   <div>
                     <form action="#" method="POST" className="space-y-6">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                          Full Name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="fullname"
+                            name="fullname"
+                            type="text"
+                            required
+                            className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
+                      </div>
+
                       <div>
                         <label
                           htmlFor="email"
