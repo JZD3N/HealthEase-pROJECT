@@ -1,14 +1,5 @@
 export default function Login() {
   return (
-    <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <html className="h-full bg-white">
         <body className="h-full">
           <div className="h-full flex min-h-full flex-1">

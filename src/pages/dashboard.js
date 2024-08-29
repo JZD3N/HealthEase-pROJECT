@@ -368,8 +368,8 @@ export default function DashBoard() {
                   </ul>
                 </div>
                 {/* Upcomming Appointments */}
-                <div className="border-t border-black/10 pt-11 bg-slate-400 border-t-emerald-700">
-                  <h2 className="px-4 text-base font-semibold leading-7 text-black sm:px-6 lg:px-8">
+                <div className="border-t border-black/10 pt-11 bg-emerald-500 rounded-md border-t-emerald-700">
+                  <h2 className="px-4 text-lg font-bold leading-7 text-black sm:px-6 lg:px-8">
                     Upcomming Appointments
                   </h2>
                   <table className="mt-6 w-full whitespace-nowrap text-left">
