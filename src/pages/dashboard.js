@@ -1,34 +1,8 @@
-import { Fragment } from 'react';
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  TransitionChild,
-} from '@headlessui/react';
-import {
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  ExclamationTriangleIcon,
   CalendarIcon,
-  ClockIcon,
-  PhotoIcon,
-  TableCellsIcon,
-  ViewColumnsIcon,
-  Bars4Icon,
   MapIcon,
   BookOpenIcon,
 } from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/20/solid';
-import NavBar from '../components/navbar';
 
 const items = [
   {
@@ -50,14 +24,6 @@ const items = [
     background: 'bg-green-500',
   },
 ];
-
-const user = {
-  name: 'User',
-  email: 'user@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1504214002698-8bdd458f134b?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-};
-
 const statuses = {
   Completed: 'text-green-400 bg-green-400/10',
   Error: 'text-rose-400 bg-rose-400/10',
