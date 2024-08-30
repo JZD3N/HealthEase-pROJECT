@@ -7,7 +7,6 @@ import AppointmentPage from './pages/appointment';
 import Template from './pages/template';
 
 
-
 function App() {
   return (
     <Router>
