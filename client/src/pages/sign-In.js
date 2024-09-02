@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../assets/logo192.png'
+
 export default function SignIn() {
   const navigate = useNavigate();
 
@@ -11,19 +13,17 @@ export default function SignIn() {
   };
 
   return (
-      <div className="flex min-h-full flex-1 flex-col justify-center align-middle px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center align-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://www.flaticon.com/free-icon-font/users-alt_5069169?related_id=5069169"
+            src={Logo}
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
             Sign in to your account
           </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div>
               <label
@@ -53,12 +53,12 @@ export default function SignIn() {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgot"
                     className="font-semibold text-indigo-400 hover:text-indigo-300"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
@@ -93,6 +93,9 @@ export default function SignIn() {
                   </Link>
           </p>
         </div>
+        </div>
+
+        
       </div>
   );
 }

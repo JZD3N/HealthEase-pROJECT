@@ -10,6 +10,7 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom';
+import Logo from '../assets/logo192.png'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -26,7 +27,7 @@ function NavBar() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="/client/public/favicon.png"
+                    src={Logo}
                     alt="HealthEase"
                   />
                 </div>

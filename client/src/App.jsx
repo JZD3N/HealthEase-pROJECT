@@ -5,6 +5,7 @@ import SignIn from './pages/sign-In';
 import NavBar from './components/navbar';
 import AppointmentPage from './pages/appointment';
 import Template from './pages/template';
+import ForgotPassword from './pages/forgot';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path='/appointment' element={<AppointmentPage />} />
+        <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/template' element={<Template />} />
       </Routes>
     </Router>

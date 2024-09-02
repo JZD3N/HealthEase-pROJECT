@@ -2,8 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-.h-full {
-  height: 100vh !important;
+html {
+  height: 100dvh !important;
 }
 
 body {
@@ -13,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100dvh !important;
 }
 
 code {

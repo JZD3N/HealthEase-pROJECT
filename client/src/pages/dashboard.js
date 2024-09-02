@@ -3,6 +3,7 @@ import {
   MapIcon,
   BookOpenIcon,
 } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const items = [
   {
@@ -97,9 +98,7 @@ function classNames(...classes) {
 
 export default function DashBoard() {
   return ( 
-      <html class="h-full bg-gray-100">
-        <body class="h-full">
-          <div className="min-h-full">
+          <div className="min-h-full bg-slate-50">
             <header className="bg-white shadow">
               <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
@@ -115,7 +114,6 @@ export default function DashBoard() {
                     Quick Access
                   </h2>
                   <ul
-                    role="list"
                     className="mt-6 grid grid-cols-1 gap-6 border-b border-t border-gray-200 py-6 sm:grid-cols-3"
                   >
                     {items.map((item, itemIdx) => (
@@ -134,14 +132,14 @@ export default function DashBoard() {
                           </div>
                           <div>
                             <h3 className="text-sm font-medium text-gray-900">
-                              <a href="#" className="focus:outline-none">
+                              <Link className="focus:outline-none">
                                 <span
                                   className="absolute inset-0"
                                   aria-hidden="true"
                                 />
                                 <span>{item.title}</span>
                                 <span aria-hidden="true"> &rarr;</span>
-                              </a>
+                              </Link>
                             </h3>
                             <p className="mt-1 text-sm text-gray-500">
                               {item.description}
@@ -153,7 +151,7 @@ export default function DashBoard() {
                   </ul>
                 </div>
                 {/* Upcomming Appointments */}
-                <div className="border-t border-black/10 pt-11 bg-emerald-500 rounded-md border-t-emerald-700">
+                <div className="shadow-sm border pt-5 bg-slate-300 rounded-xl border-t-emerald-700">
                   <h2 className="px-4 text-lg font-bold leading-7 text-black sm:px-6 lg:px-8">
                     Upcomming Appointments
                   </h2>
@@ -192,7 +190,7 @@ export default function DashBoard() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5">
+                    <tbody className="divide-y divide-white/10">
                       {UpcommingAppointments.map((item) => (
                         <tr key={item.appname}>
                           <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
@@ -225,11 +223,11 @@ export default function DashBoard() {
                   </table>
                 </div>
                 {/* Recent Activity */}
-                <div className="border-t border-white/10 pt-11">
-                  <h2 className="px-4 text-base font-semibold leading-7 text-black sm:px-6 lg:px-8">
+                <div className="border-t border-black/10 pt-11">
+                  <h2 className="px-2 text-base font-semibold leading-2 text-black sm:px-6 lg:px-8">
                     Latest Activity
                   </h2>
-                  <table className="mt-6 w-full whitespace-nowrap text-left">
+                  <table className="mt-2 w-full whitespace-nowrap text-left bg-cyan-100 rounded-2xl" >
                     <colgroup>
                       <col className="w-full sm:w-4/12" />
                       <col className="lg:w-4/12" />
@@ -318,7 +316,5 @@ export default function DashBoard() {
               </div>
             </main>
           </div>
-        </body>
-      </html>
   );
 }
