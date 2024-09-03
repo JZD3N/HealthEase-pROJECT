@@ -50,15 +50,15 @@ const people = [
   // More people...
 ];
 
-const UpcomingAppointments = [
-  {
-    appname: 'Colonoscopy',
-    place: 'UGMC',
-    time: '2:40 PM',
-    date: '24/04/2025',
-  },
-  // More items...
-];
+// const UpcomingAppointments = [
+//   {
+//     appname: 'Colonoscopy',
+//     place: 'UGMC',
+//     time: '2:40 PM',
+//     date: '24/04/2025',
+//   },
+//   // More items...
+// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -177,13 +177,13 @@ export default function DashBoard() {
                               {person.progress}
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <a
+                              <Link
                                 href="#"
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
                                 Edit
                                 <span className="sr-only">, {person.name}</span>
-                              </a>
+                              </Link>
                             </td>
                           </tr>
                         ))}
