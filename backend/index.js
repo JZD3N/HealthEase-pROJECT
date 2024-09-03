@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/config/database');
 const routes = require('./src/routes/routes');
+const mapAPI = require('./src/controllers/mapAPI')
 
 const app = express();
 const port = process.env.PORT || 5000;

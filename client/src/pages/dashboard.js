@@ -5,12 +5,14 @@ import {
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
+//Quick Access Generator
 const items = [
   {
     title: 'Add Appointment',
     description: 'Tap to quick add Appointment Dates',
     icon: CalendarIcon,
     background: 'bg-blue-500',
+    link: ''
   },
   {
     title: 'View Records',
@@ -25,64 +27,30 @@ const items = [
     background: 'bg-green-500',
   },
 ];
-const statuses = {
-  Completed: 'text-green-400 bg-green-400/10',
-  Error: 'text-rose-400 bg-rose-400/10',
-};
-const activityItems = [
+
+const people = [
   {
-    user: {
-      name: 'User@database',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    action: 'Added Appointment Date',
-    status: 'Completed',
-    date: '45 minutes ago',
+    name: 'General Check-up',
+    place: 'Ho Clinc',
+    date: '20/03/45',
+    progress: 'Completed',
   },
   {
-    user: {
-      name: 'User@database',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    action: 'Added Appointment Date',
-    status: 'Completed',
-    date: '45 minutes ago',
+    name: 'General Check-up',
+    place: 'UGMC',
+    date: '20/03/45',
+    progress: 'Completed',
   },
   {
-    user: {
-      name: 'User@database',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    action: 'Added Appointment Date',
-    status: 'Completed',
-    date: '45 minutes ago',
+    name: 'Lab Tests',
+    place: 'Lancet Labs',
+    date: '20/03/45',
+    progress: 'Completed',
   },
-  {
-    user: {
-      name: 'User@database',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    action: 'Added Appointment Date',
-    status: 'Completed',
-    date: '45 minutes ago',
-  },
-  {
-    user: {
-      name: 'User@database',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    action: 'Added Appointment Date',
-    status: 'Completed',
-    date: '45 minutes ago',
-  },
-  // More items...
+  // More people...
 ];
-const UpcommingAppointments = [
+
+const UpcomingAppointments = [
   {
     appname: 'Colonoscopy',
     place: 'UGMC',
@@ -97,224 +65,137 @@ function classNames(...classes) {
 }
 
 export default function DashBoard() {
-  return ( 
-          <div className="min-h-full bg-slate-50">
-            <header className="bg-white shadow">
-              <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                  Dashboard
+  return (
+    <div className="min-h-full bg-slate-50">
+      <header className="bg-white shadow">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
+            Dashboard
+          </h1>
+        </div>
+      </header>
+      <main>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          {/* Quick Access Bar */}
+          <div>
+  <h2 className="text-base font-semibold leading-6 text-gray-900">
+    Quick Access
+  </h2>
+  <ul className="mt-6 grid grid-cols-1 gap-6 border-b border-t border-lime-600 py-6 sm:grid-cols-3">
+    {items.map((item, itemIdx) => (
+      <li key={itemIdx} className="group flow-root">
+        <div
+          className={`relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:ring-2 hover:bg-cyan-500`} // Added hover class
+        >
+          <div
+            className={classNames(
+              item.background,
+              'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg'
+            )}
+          >
+            <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-gray-900">
+              <Link className="focus:outline-none">   
+
+                <span className="absolute inset-0" aria-hidden="true" />
+                <span>{item.title}</span>
+                <span aria-hidden="true"> &rarr;</span>
+              </Link>
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>   
+
+          {/* Upcomming Appointments */}
+          {/* Recent Activity */}
+          <div className="mt-6 px-4 sm:px-6 lg:px-8">
+            <div className="sm:flex sm:items-center">
+              <div className="sm:flex-auto">
+                <h1 className="text-base font-semibold leading-10 text-gray-900">
+                  Recent Activity
                 </h1>
               </div>
-            </header>
-            <main>
-              <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                {/* Quick Access Bar */}
-                <div>
-                  <h2 className="text-base font-semibold leading-6 text-gray-900">
-                    Quick Access
-                  </h2>
-                  <ul
-                    className="mt-6 grid grid-cols-1 gap-6 border-b border-t border-gray-200 py-6 sm:grid-cols-3"
-                  >
-                    {items.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flow-root">
-                        <div className="relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:ring-2 focus-within:ring-indigo-500 hover:bg-gray-50">
-                          <div
-                            className={classNames(
-                              item.background,
-                              'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg'
-                            )}
+            </div>
+            <div className="mt-4 flow-root">
+              <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                  <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-300">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           >
-                            <item.icon
-                              className="h-6 w-6 text-white"
-                              aria-hidden="true"
-                            />
-                          </div>
-                          <div>
-                            <h3 className="text-sm font-medium text-gray-900">
-                              <Link className="focus:outline-none">
-                                <span
-                                  className="absolute inset-0"
-                                  aria-hidden="true"
-                                />
-                                <span>{item.title}</span>
-                                <span aria-hidden="true"> &rarr;</span>
-                              </Link>
-                            </h3>
-                            <p className="mt-1 text-sm text-gray-500">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* Upcomming Appointments */}
-                <div className="shadow-sm border pt-5 bg-slate-300 rounded-xl border-t-emerald-700">
-                  <h2 className="px-4 text-lg font-bold leading-7 text-black sm:px-6 lg:px-8">
-                    Upcomming Appointments
-                  </h2>
-                  <table className="mt-6 w-full whitespace-nowrap text-left">
-                    <colgroup>
-                      <col className="w-full sm:w-4/12" />
-                      <col className="lg:w-4/12" />
-                      <col className="lg:w-2/12" />
-                      <col className="lg:w-2/12" />
-                    </colgroup>
-                    <thead className="border-b border-black/10 text-sm leading-6 text-black">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
-                        >
-                          Appointment Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
-                        >
-                          Place
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell "
-                        >
-                          Time
-                        </th>
-                        <th
-                          scope="col"
-                          className="py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-                        >
-                          Date
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/10">
-                      {UpcommingAppointments.map((item) => (
-                        <tr key={item.appname}>
-                          <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                            <div className="flex items-center gap-x-4">
-                              <div className="truncate text-sm font-medium leading-6 text-black">
-                                {item.appname}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
-                            <div className="flex gap-x-3">
-                              <div className="font-mono text-lg leading-6 text-black-400">
-                                {item.place}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-4 pl-0 pr-4 text-lg leading-6 sm:pr-8 lg:pr-20 text-black-400">
-                            <div className="flex items-center justify-end gap-x-2 sm:justify-start">
-                              <div className="hidden text-black sm:block">
-                                {item.time}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="hidden py-4 pl-0 pr-4 text-right text-lg leading-6 text-black-400 sm:table-cell sm:pr-6 lg:pr-8">
-                            <time dateTime={item.dateTime}>{item.date}</time>
-                          </td>
+                            Appointment Type
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Location
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Date
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Progress
+                          </th>
+                          <th
+                            scope="col"
+                            className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                          >
+                            <span className="sr-only">Edit</span>
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                {/* Recent Activity */}
-                <div className="border-t border-black/10 pt-11">
-                  <h2 className="px-2 text-base font-semibold leading-2 text-black sm:px-6 lg:px-8">
-                    Latest Activity
-                  </h2>
-                  <table className="mt-2 w-full whitespace-nowrap text-left bg-cyan-100 rounded-2xl" >
-                    <colgroup>
-                      <col className="w-full sm:w-4/12" />
-                      <col className="lg:w-4/12" />
-                      <col className="lg:w-2/12" />
-                      <col className="lg:w-2/12" />
-                    </colgroup>
-                    <thead className="border-b border-white/10 text-sm leading-6 text-black">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
-                        >
-                          User
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
-                        >
-                          Action
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell "
-                        >
-                          Status
-                        </th>
-                        <th
-                          scope="col"
-                          className="py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-                        >
-                          Timestamp
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {activityItems.map((item) => (
-                        <tr key={item.action}>
-                          <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                            <div className="flex items-center gap-x-4">
-                              <img
-                                src={item.user.imageUrl}
-                                alt=""
-                                className="h-8 w-8 rounded-full bg-gray-800"
-                              />
-                              <div className="truncate text-sm font-medium leading-6 text-black">
-                                {item.user.name}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
-                            <div className="flex gap-x-3">
-                              <div className="font-mono text-sm leading-6 text-gray-400">
-                                {item.action}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
-                            <div className="flex items-center justify-end gap-x-2 sm:justify-start">
-                              <time
-                                className="text-gray-400 sm:hidden"
-                                dateTime={item.dateTime}
+                      </thead>
+                      <tbody className="divide-y divide-gray-200 bg-white">
+                        {people.map((person) => (
+                          <tr key={person.date}>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                              {person.name}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {person.place}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {person.date}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {person.progress}
+                            </td>
+                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                              <a
+                                href="#"
+                                className="text-indigo-600 hover:text-indigo-900"
                               >
-                                {item.date}
-                              </time>
-                              <div
-                                className={classNames(
-                                  statuses[item.status],
-                                  'flex-none rounded-full p-1'
-                                )}
-                              >
-                                <div className="h-1.5 w-1.5 rounded-full bg-current" />
-                              </div>
-                              <div className="hidden text-black sm:block">
-                                {item.status}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
-                            <time dateTime={item.dateTime}>{item.date}</time>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                                Edit
+                                <span className="sr-only">, {person.name}</span>
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </main>
+            </div>
           </div>
+        </div>
+      </main>
+    </div>
   );
 }

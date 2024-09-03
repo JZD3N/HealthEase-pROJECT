@@ -6,6 +6,9 @@ import NavBar from './components/navbar';
 import AppointmentPage from './pages/appointment';
 import Template from './pages/template';
 import ForgotPassword from './pages/forgot';
+import Error404 from './pages/404';
+import Settings from './pages/settings';
+import MyRecords from './pages/healthrecords';
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
         <Route path='/appointment' element={<AppointmentPage />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/template' element={<Template />} />
+        <Route path='/404' element={<Error404 />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/healthrecords' element={<MyRecords />} />
       </Routes>
     </Router>
   );

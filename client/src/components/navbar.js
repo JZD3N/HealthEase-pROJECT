@@ -9,7 +9,7 @@ import {
   Transition,
 } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../assets/logo192.png'
 
 function classNames(...classes) {
@@ -46,13 +46,13 @@ function NavBar() {
                     My Appointments
                   </NavLink>
                   <NavLink
-                    to='/'
+                    to='/nearbyservices'
                     className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
                   >
                     Nearby Services
                   </NavLink>
                   <NavLink
-                    to='/'
+                    to='/healthrecords'
                     className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
                   >
                     My Records
@@ -100,32 +100,32 @@ function NavBar() {
                     <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <MenuItem>
                         {({ focus }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </MenuItem>
                       <MenuItem>
                         {({ focus }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to='/settings'
                             className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
-                          </a>
+                          </Link>
                         )}
                       </MenuItem>
                       <MenuItem>
                         {({ focus }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
-                          </a>
+                          </Link>
                         )}
                       </MenuItem>
                     </MenuItems>
