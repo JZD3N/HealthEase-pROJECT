@@ -9,6 +9,7 @@ import ForgotPassword from './pages/forgot';
 import Error404 from './pages/404';
 import Settings from './pages/settings';
 import MyRecords from './pages/healthrecords';
+import Geoservices from './pages/geoservices';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
         <Route path='/404' element={<Error404 />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/healthrecords' element={<MyRecords />} />
+        <Route path='/geoservices' element={<Geoservices />} />
+
       </Routes>
     </Router>
   );

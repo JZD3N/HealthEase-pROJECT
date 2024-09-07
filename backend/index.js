@@ -17,6 +17,6 @@ app.use(cors());
 // Define your API routes here
 app.use('./src/routes',routes)
 
-app.listen(port, () => {
+app.listen(port, () =>{
   console.log(`Server listening on port ${port}`);
 });

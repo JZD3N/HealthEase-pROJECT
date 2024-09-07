@@ -7,13 +7,13 @@ import {
   MenuItem,
   MenuItems,
   Transition,
-} from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+} from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
-import Logo from '../assets/logo192.png'
+import Logo from '../assets/logo192.png';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 function NavBar() {
@@ -25,45 +25,60 @@ function NavBar() {
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src={Logo}
-                    alt="HealthEase"
-                  />
+                  <img className="h-8 w-auto" src={Logo} alt="HealthEase" />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <NavLink
-                    to='/dashboard'
-                    className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                        : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }
                   >
                     Dashboard
                   </NavLink>
                   <NavLink
-                    to='/appointment'
-                    className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
+                    to="/appointment"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                        : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }
                   >
                     My Appointments
                   </NavLink>
                   <NavLink
-                    to='/nearbyservices'
-                    className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
+                    to="/geoservices"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                        : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }
                   >
                     Nearby Services
                   </NavLink>
                   <NavLink
-                    to='/healthrecords'
-                    className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
+                    to="/healthrecords"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                        : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }
                   >
                     My Records
                   </NavLink>
                   <NavLink
-                    to='/template'
-                    className={({isActive}) =>(isActive?'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900': 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700' )}
+                    to="/template"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900'
+                        : 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }
                   >
-                   Template Refer
+                    Template Refer
                   </NavLink>
-                  
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -102,7 +117,10 @@ function NavBar() {
                         {({ focus }) => (
                           <Link
                             href="#"
-                            className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              focus ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Your Profile
                           </Link>
@@ -111,8 +129,11 @@ function NavBar() {
                       <MenuItem>
                         {({ focus }) => (
                           <Link
-                            to='/settings'
-                            className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            to="/settings"
+                            className={classNames(
+                              focus ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Settings
                           </Link>
@@ -122,7 +143,10 @@ function NavBar() {
                         {({ focus }) => (
                           <Link
                             href="#"
-                            className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              focus ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Sign out
                           </Link>
@@ -189,8 +213,12 @@ function NavBar() {
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">User</div>
-                  <div className="text-sm font-medium text-gray-500">user@example.com</div>
+                  <div className="text-base font-medium text-gray-800">
+                    User
+                  </div>
+                  <div className="text-sm font-medium text-gray-500">
+                    user@example.com
+                  </div>
                 </div>
                 <button
                   type="button"

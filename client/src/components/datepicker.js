@@ -1,8 +1,14 @@
+// Date Picker
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { XMarkIcon } from '@heroicons/react/16/solid';// Importing an icon from Heroicons (optional)
 
+/**
+ * A multi-step form modal component.
+ * It takes an isOpen prop to determine whether the modal is visible or not.
+ * It also takes an onClose prop to close the modal.
+ */
 function MultiStepFormModal({ isOpen, onClose }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -54,6 +60,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {/* Step 1: Enter Place */}
           {currentStep === 1 && (
             <div>
               <label htmlFor="place" className="block text-sm font-medium text-gray-700">
@@ -70,6 +77,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
             </div>
           )}
 
+          {/* Step 2: Enter Office */}
           {currentStep === 2 && (
             <div>
               <label htmlFor="office" className="block text-sm font-medium text-gray-700">
@@ -86,6 +94,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
             </div>
           )}
 
+          {/* Step 3: Select Date */}
           {currentStep === 3 && (
             <div>
               <label htmlFor="date" className="block text-sm font-medium text-gray-700">
@@ -101,6 +110,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
             </div>
           )}
 
+          {/* Step 4: Select Time */}
           {currentStep === 4 && (
             <div>
               <label htmlFor="time" className="block text-sm font-medium text-gray-700">
@@ -120,6 +130,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
             </div>
           )}
 
+          {/* Step 5: Confirm Details */}
           {currentStep === 5 && (
             <div>
               <label htmlFor="confirm" className="block text-sm font-medium text-gray-700">
@@ -182,3 +193,4 @@ function MultiStepFormModal({ isOpen, onClose }) {
 }
 
 export default MultiStepFormModal;
+
