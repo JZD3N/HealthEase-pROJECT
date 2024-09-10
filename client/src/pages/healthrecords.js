@@ -27,10 +27,11 @@ export default function MyRecords() {
                 <div className="overflow-hidden rounded-lg bg-white shadow">
                   <div className="min-h-full p-6">
                     {/* Your content */}
-                    <FilePick />
-                      <span className="mt-2 block text-sm text-center font-semibold text-gray-900">
+                    <span className="mt-2 block text-sm text-center font-semibold text-gray-900">
                         Add New Records File
                       </span>
+                      <FilePick />
+                      
                     
                   </div>
                 </div>
