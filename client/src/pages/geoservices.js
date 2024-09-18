@@ -1,17 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { HomeModernIcon, HeartIcon, BuildingStorefrontIcon } from '@heroicons/react/24/solid';
 
 const Geoservices = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
   });
 
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-
+  const [selectedType, setSelectedType] = useState("hospital");
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchType, setSearchType] = useState("hospital");
   const [userLocation, setUserLocation] = useState(null);
   const mapRef = useRef(null);
 
@@ -31,51 +29,49 @@ const Geoservices = () => {
     }
   }, []);
 
-  const handleSearch = async () => {
-    if (searchQuery.trim() === "") return;
-
-    try {
+  useEffect(() => {
+    const fetchMarkers = async () => {
       const response = await fetch(
-        `/api/places?query=${searchQuery}${searchType}&location=${userLocation.lat},${userLocation.lng}&radius=5000`
+        `/api/places?query=${selectedType}&location=${userLocation.lat},${userLocation.lng}&radius=5000`
       );
       const data = await response.json();
       setMarkers(data.results);
-    } catch (error) {
-      console.error("Error fetching places:", error);
+    };
+    if (userLocation) {
+      fetchMarkers();
     }
-  };
+  }, [selectedType, userLocation]);
 
-  if (loadError) return <div>Error loading maps</div>;
-  if (!isLoaded) return <div>Loading Maps...</div>;
+  if (loadError) return <div className="text-red-500">Error loading maps</div>;
+  if (!isLoaded) return <div className="text-gray-500">Loading Maps...</div>;
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col md:flex-row items-center justify-between mb-4">
-        <input
-          type="text"
-          placeholder="Search for hospitals, labs, or pharmacies"
-          className="border border-gray-400 rounded-md py-2 px-4 w-full md:w-auto mr-2"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <select 
-          value={searchType} 
-          onChange={(e) => setSearchType(e.target.value)}
-          className="border border-gray-400 rounded-md py-2 px-4 w-full md:w-auto mr-2"
+      <div className="flex flex-wrap md:flex-nowrap items-center justify-between md:space-x-4 mb-4">
+        <button
+          className={`flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ${selectedType === "hospital" ? "bg-blue-700" : "opacity-50"}`}
+          onClick={() => setSelectedType("hospital")}
         >
-          <option value="hospital">Hospital</option>
-          <option value="lab">Lab</option>
-          <option value="pharmacy">Pharmacy</option>
-        </select>
-        <button 
-          onClick={handleSearch}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+          <HomeModernIcon className="inline-block h-5 w-5 mr-2" />
+          <span className="hidden md:inline-block">Hospital</span>
+        </button>
+        <button
+          className={`flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ${selectedType === "lab" ? "bg-blue-700" : "opacity-50"}`}
+          onClick={() => setSelectedType("lab")}
         >
-          Search
+          <HeartIcon className="inline-block h-5 w-5 mr-2" />
+          <span className="hidden md:inline-block">Lab</span>
+        </button>
+        <button
+          className={`flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ${selectedType === "pharmacy" ? "bg-blue-700" : "opacity-50"}`}
+          onClick={() => setSelectedType("pharmacy")}
+        >
+          <BuildingStorefrontIcon className="inline-block h-5 w-5 mr-2" />
+          <span className="hidden md:inline-block">Pharmacy</span>
         </button>
       </div>
       <GoogleMap
-        mapContainerClassName="h-[600px] w-full" 
+        mapContainerClassName="h-[600px] w-full"
         center={userLocation}
         zoom={10}
         options={{
@@ -103,7 +99,7 @@ const Geoservices = () => {
               <p>{selectedMarker.formatted_address}</p>
               {selectedMarker.photos && (
                 <img
-                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${"AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ"}`}
                   alt={selectedMarker.name}
                 />
               )}
@@ -116,4 +112,3 @@ const Geoservices = () => {
 };
 
 export default Geoservices;
-
