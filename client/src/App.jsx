@@ -11,24 +11,20 @@ import Settings from './pages/settings';
 import MyRecords from './pages/healthrecords';
 import Geoservices from './pages/geoservices';
 
-
 function App() {
   return (
     <Router>
-      <NavBar/>
       <Routes>
-        {/* Define the URL paths for each page */}
         <Route path="/" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route path='/appointment' element={<AppointmentPage />} />
-        <Route path='/forgot' element={<ForgotPassword />} />
-        <Route path='/template' element={<Template />} />
-        <Route path='/404' element={<Error404 />} />
-        <Route path='/settings' element={<Settings />} />
-        <Route path='/healthrecords' element={<MyRecords />} />
-        <Route path='/geoservices' element={<Geoservices />} />
-
+        <Route path="/dashboard" element={<><NavBar /><DashBoard /></>} />
+        <Route path="/appointment" element={<><NavBar /><AppointmentPage /></>} />
+        <Route path="/forgot" element={<><NavBar /><ForgotPassword /></>} />
+        <Route path="/template" element={<><NavBar /><Template /></>} />
+        <Route path="/404" element={<><NavBar /><Error404 /></>} />
+        <Route path="/settings" element={<><NavBar /><Settings /></>} />
+        <Route path="/healthrecords" element={<><NavBar /><MyRecords /></>} />
+        <Route path="/geoservices" element={<><NavBar /><Geoservices /></>} />
       </Routes>
     </Router>
   );

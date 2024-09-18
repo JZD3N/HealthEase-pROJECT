@@ -116,19 +116,6 @@ function NavBar() {
                       <MenuItem>
                         {({ focus }) => (
                           <Link
-                            href="#"
-                            className={classNames(
-                              focus ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Your Profile
-                          </Link>
-                        )}
-                      </MenuItem>
-                      <MenuItem>
-                        {({ focus }) => (
-                          <Link
                             to="/settings"
                             className={classNames(
                               focus ? 'bg-gray-100' : '',
@@ -141,15 +128,20 @@ function NavBar() {
                       </MenuItem>
                       <MenuItem>
                         {({ focus }) => (
-                          <Link
-                            href="#"
+                          <button
+                            type="button"
                             className={classNames(
                               focus ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
+                              'block w-full px-4 py-2 text-left text-sm text-gray-700'
                             )}
+                            onClick={() => {
+                              if (window.confirm('Are you sure you want to logout?')) {
+                                window.location.href = '/';
+                              }
+                            }}
                           >
                             Sign out
-                          </Link>
+                          </button>
                         )}
                       </MenuItem>
                     </MenuItems>
@@ -174,34 +166,34 @@ function NavBar() {
           <DisclosurePanel className="sm:hidden">
             <div className="space-y-1 pb-3 pt-2">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-              <DisclosureButton
+              <NavLink
                 as="a"
-                href="#"
+                to="/"
                 className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
               >
                 Dashboard
-              </DisclosureButton>
-              <DisclosureButton
+              </NavLink>
+              <NavLink
                 as="a"
-                href="#"
+                to="/appointment"
                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
               >
                 My Appointments
-              </DisclosureButton>
-              <DisclosureButton
+              </NavLink>
+              <NavLink
                 as="a"
-                href="#"
+                to="/geoservices"
                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
               >
                 Nearby Services
-              </DisclosureButton>
-              <DisclosureButton
+              </NavLink>
+              <NavLink
                 as="a"
-                href="#"
+                to="/healthrecords"
                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
               >
                 My Records
-              </DisclosureButton>
+              </NavLink>
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
@@ -214,10 +206,10 @@ function NavBar() {
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-gray-800">
-                    User
+                    Jacob Quarshie
                   </div>
                   <div className="text-sm font-medium text-gray-500">
-                    user@example.com
+                    jacobquarshie01@gmail.com
                   </div>
                 </div>
                 <button

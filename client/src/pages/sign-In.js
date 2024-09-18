@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo192.png'
+import Logo from '../assets/logo192.png';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function SignIn() {
           <img
             className="mx-auto h-10 w-auto"
             src={Logo}
-            alt="Your Company"
+            alt="HealthEase"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
             Sign in to your account
