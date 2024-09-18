@@ -1,8 +1,9 @@
+import { useMemo, useState } from 'react';
 import MultiStepFormModal from '../components/datepicker';
-import React, { useState } from 'react';
 
 const people = [
   {
+    id: 1,
     name: 'jacob',
     date: '22/03/2014',
     time: '10:30',
@@ -16,11 +17,23 @@ const people = [
 export default function AppointmentsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  const tableData = useMemo(
+    () =>
+      people.map(
+        ({ id, name, location, date, time, image }) => ({
+          id,
+          name,
+          location,
+          date,
+          time,
+          image,
+        })
+      ),
+    [people]
+  );
 
   return (
-    <div className="h-full">
+    <>
       <header className="bg-white shadow">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
@@ -35,14 +48,13 @@ export default function AppointmentsPage() {
               <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
                 <div className="flex items-center justify-center bg-gray-100">
                   <button
-                    onClick={handleOpenModal}
+                    onClick={() => setIsModalOpen(true)}
                     className="bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700"
                   >
                     Add Appointment
                   </button>
-
-                  <MultiStepFormModal isOpen={isModalOpen} onClose={handleCloseModal} />
                 </div>
+                <MultiStepFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
               </div>
             </div>
             <div className="mt-8 flow-root">
@@ -81,31 +93,31 @@ export default function AppointmentsPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {people.map((person) => (
-                        <tr key={person.id}>
+                      {tableData.map((row) => (
+                        <tr key={row.id}>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                             <div className="flex items-center">
                               <div className="h-11 w-11 flex-shrink-0">
                                 <img
                                   className="h-11 w-11 rounded-full"
-                                  src={person.avatar}
+                                  src={row.image}
                                   alt=""
                                 />
                               </div>
                               <div className="ml-4">
                                 <div className="font-medium text-gray-900">
-                                  {person.name}
+                                  {row.name}
                                 </div>
                                 <div className="mt-1 text-gray-500">
-                                  {person.location}
+                                  {row.location}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                            <div className="text-gray-900">{person.date}</div>
+                            <div className="text-gray-900">{row.date}</div>
                             <div className="mt-1 text-gray-500">
-                              {person.time}
+                              {row.time}
                             </div>
                           </td>
                           <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
@@ -114,7 +126,7 @@ export default function AppointmentsPage() {
                             </span>
                           </td>
                           <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                            {person.role}
+                            {row.role}
                           </td>
                         </tr>
                       ))}
@@ -124,8 +136,9 @@ export default function AppointmentsPage() {
               </div>
             </div>
           </div>
-          </div>         
+        </div>
         </main>
-      </div>
+      </>
     );
   }
+

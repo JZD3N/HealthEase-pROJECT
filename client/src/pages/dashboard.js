@@ -77,48 +77,37 @@ export default function DashBoard() {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           {/* Quick Access Bar */}
-          <div>
-  <h2 className="text-base font-semibold leading-6 text-gray-900">
-    Quick Access
-  </h2>
-  <ul className="mt-6 grid grid-cols-1 gap-6 border-b border-t border-lime-600 py-6 sm:grid-cols-3">
-    {items.map((item, itemIdx) => (
-      <li key={itemIdx} className="group flow-root">
-        <div
-          className={`relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:ring-2 hover:bg-cyan-500`} // Added hover class
-        >
-          <div
-            className={classNames(
-              item.background,
-              'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg'
-            )}
-          >
-            <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-          </div>
-          <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              <Link className="focus:outline-none">   
-
-                <span className="absolute inset-0" aria-hidden="true" />
-                <span>{item.title}</span>
-                <span aria-hidden="true"> &rarr;</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {items.map((item, itemIdx) => (
+              <Link
+                key={itemIdx}
+                to={item.link}
+                className="group relative flex items-center space-x-4 rounded-xl p-4 transition duration-300 ease-in-out hover:bg-cyan-500"
+              >
+                <div
+                  className={classNames(
+                    item.background,
+                    'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg'
+                  )}
+                >
+                  <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-sm font-medium text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                </div>
               </Link>
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+            ))}
           </div>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>   
-
           {/* Upcomming Appointments */}
           {/* Recent Activity */}
           <div className="mt-6 px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
                 <h1 className="text-base font-semibold leading-10 text-gray-900">
-                  Recent Activity
+                  Upcoming Appointments
                 </h1>
               </div>
             </div>
@@ -151,7 +140,7 @@ export default function DashBoard() {
                             scope="col"
                             className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                           >
-                            Progress
+                            Time
                           </th>
                           <th
                             scope="col"
@@ -174,7 +163,7 @@ export default function DashBoard() {
                               {person.date}
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              {person.progress}
+                              {person.time}
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                               <Link
@@ -199,3 +188,4 @@ export default function DashBoard() {
     </div>
   );
 }
+
