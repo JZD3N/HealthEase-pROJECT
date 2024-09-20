@@ -5,6 +5,7 @@ import { HomeModernIcon, HeartIcon, BuildingStorefrontIcon } from '@heroicons/re
 const Geoservices = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
+    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.6700683915201155,-0.18347183534477507&radius=300&type=hospital&key=AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ
   });
 
   const [selectedType, setSelectedType] = useState("hospital");

@@ -10,6 +10,7 @@ import Error404 from './pages/404';
 import Settings from './pages/settings';
 import MyRecords from './pages/healthrecords';
 import Geoservices from './pages/geoservices';
+import Tests from './pages/testmaps';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/settings" element={<><NavBar /><Settings /></>} />
         <Route path="/healthrecords" element={<><NavBar /><MyRecords /></>} />
         <Route path="/geoservices" element={<><NavBar /><Geoservices /></>} />
+        <Route path="/testmaps" element={<><NavBar /><Tests /></>} />
       </Routes>
     </Router>
   );
