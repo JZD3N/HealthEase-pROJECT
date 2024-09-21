@@ -3,7 +3,7 @@ const app = express();
 const axios = require('axios');
 
 // Set up Google Maps API credentials
-const apiKey = 'AIzaSyD6scoBO74hV5-0x3BRmjJk-wsztI1L2Gk';
+const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 // API endpoint to search for places
 app.get('/api/places', (req, res) => {

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 //My config data for the database
 const connectDB = async () => {
   try {
