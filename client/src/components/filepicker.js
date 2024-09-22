@@ -1,56 +1,57 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Document, Page } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-//TODO: Fix GlobalWorker Service
-//TODO: Fix the error message when no file is selected
-//TODO Implement CRUD functionality
-//TODO: Send files to database
-
-const FileUpload = ({ onFileUpload }) => {
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => {
-      onFileUpload(acceptedFiles[0]);
-    },
+const FilePicker = () => {
+  const [files, setFiles] = useState([]);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: acceptedFiles => {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+    }
   });
 
+  const handleSave = () => {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file));
+    fetch('//your api for come here', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  };
+
+  const reset = () => {
+    setFiles([]);
+  };
+
   return (
-    <div className="p-4 border-2 border-dashed border-gray-400 rounded-md">
-      <div {...getRootProps({ className: 'text-center cursor-pointer' })}>
+    <section className="container mx-auto p-4">
+      <div {...getRootProps()} className="mb-4 p-4 border-2 border-dashed border-gray-300 rounded-lg">
         <input {...getInputProps()} />
-        <p className="text-gray-600">
-          Drag 'n' drop a file here, or click to select a file
-        </p>
+        {
+          isDragActive ? <p>Drop the files here ...</p> : <p>Drag 'n' drop some files here, or click to select files</p>
+        }
       </div>
-    </div>
-  );
-};
-
-/**
- * 
- * 
- * This component allows users to upload a file and displays the uploaded file as a PDF.
- * 
- * @returns {JSX.Element} The rendered FilePicker component.
- */
-const FilePicker = () => {
-  // State to hold the uploaded file
-  const [uploadedFile, setUploadedFile] = useState(null);
-
-  return (
-    <div className="container mx-auto p-4">
-      {/* FileUpload component to handle file uploads */}
-      <FileUpload onFileUpload={setUploadedFile} />
-      {/* DocumentViewer component to display the uploaded file as a PDF */}
-      {uploadedFile && (
-        <Document file={uploadedFile}>
-          <Page pageNumber={1} />
-        </Document>
-      )}
-    </div>
+      <div className="flex flex-wrap">
+        {files.map(file => (
+          <div key={file.name} className="w-1/2 md:w-1/3 xl:w-1/4 p-2">
+            <img src={file.preview} alt={file.name} />
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-wrap space-x-5 justify-end">
+      <button onClick={handleSave} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Save Files
+      </button>
+      <button onClick={reset} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+          Reset
+      </button>
+      </div>
+    </section>
   );
 };
 
 export default FilePicker;
-

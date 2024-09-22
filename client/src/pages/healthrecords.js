@@ -1,4 +1,5 @@
 import FilePick from "../components/filepicker";
+import FileDisplay from "../components/filedisplay";
 export default function MyRecords() {
   return (
     <div className="min-h-full">
@@ -46,7 +47,7 @@ export default function MyRecords() {
                 <div className="overflow-hidden rounded-lg bg-white shadow">
                   <div className="p-6">
                     {/* Your content */}
-
+                    <FileDisplay />
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Eligendi, doloremque velit blanditiis distinctio error

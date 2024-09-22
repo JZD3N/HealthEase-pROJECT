@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import SignUp from './pages/sign-up';
 import DashBoard from './pages/dashboard';
 import SignIn from './pages/sign-In';
@@ -11,7 +12,6 @@ import Settings from './pages/settings';
 import MyRecords from './pages/healthrecords';
 import Geoservices from './pages/geoservices';
 import Tests from './pages/testmaps';
-
 function App() {
   return (
     <Router>
