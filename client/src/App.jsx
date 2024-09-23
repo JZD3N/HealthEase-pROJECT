@@ -12,6 +12,7 @@ import Settings from './pages/settings';
 import MyRecords from './pages/healthrecords';
 import Geoservices from './pages/geoservices';
 import Tests from './pages/testmaps';
+
 function App() {
   return (
     <Router>

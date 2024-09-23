@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { HomeModernIcon, HeartIcon, BuildingStorefrontIcon } from '@heroicons/react/24/solid';
 
+
 const Geoservices = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
-    // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.6700683915201155,-0.18347183534477507&radius=300&type=hospital&key=AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ
+    googleMapsApiKey: "process.env.REACT_APP_GOOGLE_MAPS_API_KEY",
   });
 
   const [selectedType, setSelectedType] = useState("hospital");
@@ -100,7 +100,7 @@ const Geoservices = () => {
               <p>{selectedMarker.formatted_address}</p>
               {selectedMarker.photos && (
                 <img
-                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${"AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ"}`}
+                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
                   alt={selectedMarker.name}
                 />
               )}

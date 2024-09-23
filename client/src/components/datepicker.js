@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { XMarkIcon } from '@heroicons/react/16/solid';// Importing an icon from Heroicons (optional)
+import axios from 'axios';
 
 /**
  * A multi-step form modal component.
@@ -33,12 +34,19 @@ function MultiStepFormModal({ isOpen, onClose }) {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Selected Date:', selectedDate);
-    console.log('Selected Time:', selectedTime);
-    console.log('Selected Place:', selectedPlace);
-    console.log('Selected Office:', selectedOffice);
+    try {
+      const { data } = await axios.post('/appointment', { selectedDate, selectedTime, selectedPlace, selectedOffice });
+      if (data === "Success") {
+        resetForm();
+      } else {
+        console.log("Data input failed:", data);
+      }
+    } catch (err) {
+      console.log("Error in sending data", err);
+    }
     onClose();
   };
 
@@ -59,7 +67,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} method="POST" action='#'>
           {/* Step 1: Enter Place */}
           {currentStep === 1 && (
             <div>
