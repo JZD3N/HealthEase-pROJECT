@@ -38,7 +38,7 @@ function MultiStepFormModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/appointment', { selectedDate, selectedTime, selectedPlace, selectedOffice });
+      const { data } = await axios.post('api/appointment', { selectedDate, selectedTime, selectedPlace, selectedOffice });
       if (data === "Success") {
         resetForm();
       } else {

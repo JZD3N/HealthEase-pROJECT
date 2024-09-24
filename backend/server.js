@@ -12,7 +12,7 @@ const routes = require('./src/routes/routes');
 const mapAPI = require('./src/controllers/maps')
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 // Connect to MongoDB
 connectDB()
@@ -20,6 +20,7 @@ connectDB()
 
 // Enable CORS/parser
 app.use(cors());
+app.use(express.json()); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

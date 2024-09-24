@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { HomeModernIcon, HeartIcon, BuildingStorefrontIcon } from '@heroicons/react/24/solid';
 
-
 const Geoservices = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "process.env.REACT_APP_GOOGLE_MAPS_API_KEY",
+    googleMapsApiKey:"AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
   });
 
   const [selectedType, setSelectedType] = useState("hospital");
@@ -23,8 +22,8 @@ const Geoservices = () => {
             lng: position.coords.longitude,
           });
         },
-        () => {
-          console.error("Failed to get user location.");
+        (error) => {
+          console.error("Failed to get user location: ", error);
         }
       );
     }
@@ -32,15 +31,31 @@ const Geoservices = () => {
 
   useEffect(() => {
     const fetchMarkers = async () => {
-      const response = await fetch(
-        `/api/places?query=${selectedType}&location=${userLocation.lat},${userLocation.lng}&radius=5000`
-      );
-      const data = await response.json();
-      setMarkers(data.results);
+      if (!userLocation) {
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `/api/places?query=${selectedType}&location=${userLocation.lat},${userLocation.lng}&radius=5000`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.results) {
+          throw new Error("Invalid response from API");
+        }
+
+        setMarkers(data.results);
+      } catch (error) {
+        console.error("Failed to fetch markers: ", error);
+      }
     };
-    if (userLocation) {
-      fetchMarkers();
-    }
+    fetchMarkers();
   }, [selectedType, userLocation]);
 
   if (loadError) return <div className="text-red-500">Error loading maps</div>;
@@ -74,7 +89,7 @@ const Geoservices = () => {
       <GoogleMap
         mapContainerClassName="h-[600px] w-full"
         center={userLocation}
-        zoom={10}
+        zoom={70}
         options={{
           disableDefaultUI: true,
           zoomControl: true,
@@ -100,7 +115,7 @@ const Geoservices = () => {
               <p>{selectedMarker.formatted_address}</p>
               {selectedMarker.photos && (
                 <img
-                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${selectedMarker.photos[0].photo_reference}&key=${'AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ'}`}
                   alt={selectedMarker.name}
                 />
               )}
