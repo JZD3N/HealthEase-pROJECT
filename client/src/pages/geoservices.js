@@ -1,32 +1,36 @@
 import React, { useState, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { HomeModernIcon, HeartIcon, BuildingStorefrontIcon } from '@heroicons/react/24/solid';
+import HospitalsTable from "../components/mapComps/hospitaltable";
 
 const Geoservices = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey:"AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
+    googleMapsApiKey: "AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ",
   });
 
-  const [selectedType, setSelectedType] = useState("hospital");
+  const [selectedType, setSelectedType] = useState("");
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Failed to get user location: ", error);
-        }
-      );
-    }
+    const fetchLocation = async () => {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+
+        const { latitude, longitude } = position.coords;
+        setUserLocation({
+          lat: latitude,
+          lng: longitude,
+        });
+      } catch (error) {
+        console.error("Failed to get user location: ", error);
+      }
+    };
+    fetchLocation();
   }, []);
 
   useEffect(() => {
@@ -58,10 +62,15 @@ const Geoservices = () => {
     fetchMarkers();
   }, [selectedType, userLocation]);
 
-  if (loadError) return <div className="text-red-500">Error loading maps</div>;
-  if (!isLoaded) return <div className="text-gray-500">Loading Maps...</div>;
+  if (loadError) {
+    return <div className="text-red-500">Error loading maps</div>;
+  }
 
-  return (
+  if (!isLoaded) {
+    return <div className="text-gray-500">Loading Maps...</div>;
+  }
+
+  return (<div>
     <div className="container mx-auto p-4">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between md:space-x-4 mb-4">
         <button
@@ -124,6 +133,9 @@ const Geoservices = () => {
         )}
       </GoogleMap>
     </div>
+    <HospitalsTable />
+  </div>
+    
   );
 };
 

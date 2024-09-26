@@ -1,35 +1,30 @@
 const express = require('express');
 const app = express();
+const port = 3001;
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const mongoose = require("mongoose");
-// const bcrypt = require("bcrypt");
-require("dotenv").config();
+const axios = require('axios');
+const corsOptions = {
+    origin: 'http://localhost:3000',
+};
+app.use (cors(corsOptions));
 
-//Only routes will be defined here
-const connectDB = require('./src/config/database');
-const routes = require('./src/routes/routes');
-const mapAPI = require('./src/controllers/maps')
-
-
-const port = process.env.PORT || 4000;
-
-// Connect to MongoDB
-connectDB()
-
-
-// Enable CORS/parser
-app.use(cors());
-app.use(express.json()); 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-
-app.listen(port, () =>{
-  console.log(`Server listening on port ${port}`);
+app.get('/api',(req, res) => {
+    res.json({ message: 'Hello from server!' });
 });
 
-// Define your API routes here
-app.use('./src/routes',routes)
-app.use('/api/maps',mapAPI)
+const GOOGLE_PLACES_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+const API_KEY = 'AIzaSyCUXh4aQnm4iGFUSGqChCl0cbR5DHaoYaQ';
+
+app.get('/api/hospitals', async (req, res) => {
+    try {
+        const response = await axios.get(`${GOOGLE_PLACES_API_URL}?location=5.6700683915201155,-0.18347183534477507&radius=1000&type=hospital&key=${API_KEY}`);
+        res.json(response.data.results);
+    } catch (error) {
+        console.error('Error fetching hospitals:', error);
+        res.status(500).json({ error: 'Failed to fetch hospitals' });
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+})
